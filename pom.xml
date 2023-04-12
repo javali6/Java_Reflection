@@ -12,6 +12,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <junit.version>5.8.2</junit.version>
+
     </properties>
 
     <dependencies>
@@ -38,6 +39,7 @@
             <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
+
     </dependencies>
 
     <build>
@@ -51,6 +53,7 @@
                     <target>19</target>
                 </configuration>
             </plugin>
+
             <plugin>
                 <groupId>org.openjfx</groupId>
                 <artifactId>javafx-maven-plugin</artifactId>
@@ -60,7 +63,7 @@
                         <!-- Default configuration for running with: mvn clean javafx:run -->
                         <id>default-cli</id>
                         <configuration>
-                            <mainClass>com.example.refleksje/com.example.refleksje.HelloApplication</mainClass>
+                            <mainClass>lab.reflections.Application</mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>
                             <jlinkImageName>app</jlinkImageName>

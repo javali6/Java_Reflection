@@ -1,8 +1,9 @@
-module com.example.refleksje {
+module lab.reflections {
     requires javafx.controls;
     requires javafx.fxml;
 
 
-    opens com.example.refleksje to javafx.fxml;
-    exports com.example.refleksje;
+
+    opens lab.reflections to javafx.fxml;
+    exports lab.reflections;
 }

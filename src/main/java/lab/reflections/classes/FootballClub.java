@@ -8,7 +8,11 @@ public class FootballClub {
     private Boolean isChampion;
     private Double ptsPerGame;
 
-    public FootballClub(String clubName, Integer year, String textDescription, Boolean isChampion, Double ptsPerGame) {
+    public FootballClub(String clubName,
+                        Integer year,
+                        String textDescription,
+                        Boolean isChampion,
+                        Double ptsPerGame) {
         this.clubName = clubName;
         this.year = year;
         this.textDescription = textDescription;
@@ -40,11 +44,11 @@ public class FootballClub {
         this.textDescription = textDescription;
     }
 
-    public Boolean getChampion() {
+    public Boolean getIsChampion() {
         return isChampion;
     }
 
-    public void setChampion(Boolean champion) {
+    public void setIsChampion(Boolean champion) {
         isChampion = champion;
     }
 

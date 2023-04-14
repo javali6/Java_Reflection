@@ -29,18 +29,22 @@ public class InterfaceController implements Initializable {
     @FXML
     private VBox vBox;
 
+    private Handler handler;
+    private ClassModifier classModifier;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        Handler handler = new Handler(classNameTextField, vBox, pane);
+        handler = new Handler(classNameTextField, vBox);
+        classModifier = new ClassModifier(handler, pane);
     }
 
     @FXML
     void createObject(ActionEvent event) {
-
+        handler.createObject();
     }
 
     @FXML
     void saveChanges(ActionEvent event) {
-
+        classModifier.changeParameters();
     }
 }

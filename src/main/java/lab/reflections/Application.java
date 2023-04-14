@@ -12,7 +12,7 @@ public class Application extends javafx.application.Application {
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource("reflectAppGui.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 630, 538);
-        stage.setTitle("Hello!");
+        stage.setTitle("Reflection App");
         stage.setScene(scene);
         stage.show();
 

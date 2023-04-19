@@ -10,7 +10,8 @@ public class FieldsCreator {
 
     private Class<?> aClass;
     private List<Field> fieldsList;
-    private List<Method> methodsList;
+    private List<Method> setterMethodsList;
+    private List<Method> getterMethodsList;
     private List<String> listOfFieldsName;
     private List<String> listOfSettersName;
 
@@ -19,7 +20,7 @@ public class FieldsCreator {
     }
 
     public void getFields() {
-        methodsList = getClassParams();
+        setterMethodsList = getClassParams();
 
         fieldsList = new ArrayList<>();
         listOfFieldsName.forEach((elem)->{
@@ -47,9 +48,9 @@ public class FieldsCreator {
                 .map(String::trim)
                 .map(s -> Character.toLowerCase(s.charAt(0)) + s.substring(1)).toList();
 
-        System.out.println("Fields Creator Line: 49");
-        System.out.println(listOfSettersName);
-        System.out.println(listOfFieldsName);
+
+        getterMethodsList = allMethods.stream()
+                .filter(method -> method.getName().contains("get")).toList();
 
         return allMethods.stream()
                 .filter(method -> method.getName().contains("set")).toList();
@@ -71,7 +72,11 @@ public class FieldsCreator {
         return listOfSettersName;
     }
 
-    public List<Method> getMethodsList() {
-        return methodsList;
+    public List<Method> getSetterMethodsList() {
+        return setterMethodsList;
+    }
+
+    public List<Method> getGetterMethodsList() {
+        return getterMethodsList;
     }
 }

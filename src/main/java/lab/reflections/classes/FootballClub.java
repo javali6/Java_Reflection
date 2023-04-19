@@ -8,16 +8,12 @@ public class FootballClub {
     private Boolean isChampion;
     private Double ptsPerGame;
 
-    public FootballClub(String clubName,
-                        Integer year,
-                        String textDescription,
-                        Boolean isChampion,
-                        Double ptsPerGame) {
-        this.clubName = clubName;
-        this.year = year;
-        this.textDescription = textDescription;
-        this.isChampion = isChampion;
-        this.ptsPerGame = ptsPerGame;
+    public FootballClub() {
+        clubName = "Lech";
+        year = 1922;
+        textDescription = "KKS Lech Poznan";
+        isChampion = true;
+        ptsPerGame = 2.6;
     }
 
     public String getClubName() {
@@ -58,5 +54,16 @@ public class FootballClub {
 
     public void setPtsPerGame(Double ptsPerGame) {
         this.ptsPerGame = ptsPerGame;
+    }
+
+    @Override
+    public String toString() {
+        return "FootballClub{" +
+                "\nclubName='" + clubName + '\'' +
+                ", \nyear=" + year +
+                ", \ntextDescription='" + textDescription + '\'' +
+                ", \nisChampion=" + isChampion +
+                ", \nptsPerGame=" + ptsPerGame +
+                '}';
     }
 }

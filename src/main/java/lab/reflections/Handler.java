@@ -2,20 +2,21 @@ package lab.reflections;
 
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import lab.reflections.classes.FootballClub;
 
-import java.util.ArrayList;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 public class Handler {
 
     private TextField classNameTextField;
     private VBox vBox;
     private FieldsCreator fieldsCreator;
+    private Object object;
     private Map<String, TextInputControl> fieldsMap;
 
     public Handler(TextField classNameTextField, VBox vBox) {
@@ -31,14 +32,18 @@ public class Handler {
             Class<?> aClass = Class.forName(className);
             fieldsCreator = new FieldsCreator(aClass);
             fieldsCreator.getFields();
+
+            Constructor<?> constructor = aClass.getConstructor();
+            object = constructor.newInstance();
             generateGraphicFields();
 
-        } catch (ClassNotFoundException e) {
+        } catch (ClassNotFoundException | NoSuchMethodException | InvocationTargetException | InstantiationException |
+                 IllegalAccessException e) {
             throw new RuntimeException(e);
         }
     }
 
-    private void generateGraphicFields() {
+    private void generateGraphicFields() throws InvocationTargetException, IllegalAccessException {
 
         fieldsMap = new HashMap<>();
 
@@ -48,11 +53,19 @@ public class Handler {
                 textArea.setMaxSize(150, 80);
                 fieldsMap.put(label, textArea);
                 vBox.getChildren().addAll(new HBox(textArea, new Label(" <- " + label)));
+
+                Optional<Method> method = fieldsCreator.getGetterMethodsList().stream()
+                        .filter(m -> m.getName().toLowerCase().contains(label.toLowerCase())).findFirst();
+                textArea.setText(method.get().invoke(object).toString());
             }
             else {
                 TextField textField = new TextField();
                 fieldsMap.put(label, textField);
                 vBox.getChildren().addAll(new HBox(textField, new Label(" <- " + label)));
+
+                Optional<Method> method = fieldsCreator.getGetterMethodsList().stream()
+                        .filter(m -> m.getName().toLowerCase().contains(label.toLowerCase())).findAny();
+                textField.setText(method.get().invoke(object).toString());
             }
 
         }
@@ -73,5 +86,9 @@ public class Handler {
 
     public Map<String, TextInputControl> getFieldsMap() {
         return fieldsMap;
+    }
+
+    public Object getObject() {
+        return object;
     }
 }
